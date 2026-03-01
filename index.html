@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>TypeNova — Adaptive Typing Platform</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-bg"></div>
+  <main class="app" id="appRoot">
+    <header class="top-bar glass">
+      <div class="brand-wrap">
+        <h1>TypeNova</h1>
+        <p>Adaptive practice. Zero friction.</p>
+      </div>
+      <div class="top-actions">
+        <button id="themeToggle" class="btn small">🌙 / ☀️</button>
+        <button id="focusToggle" class="btn small">Focus Mode</button>
+      </div>
+    </header>
+
+    <section class="controls glass">
+      <div class="control-group">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+      <div class="control-group toggle-wrap">
+        <label for="aiMode">AI Adaptive</label>
+        <input type="checkbox" id="aiMode" checked />
+      </div>
+      <div class="control-group toggle-wrap">
+        <label for="soundMode">Sound</label>
+        <input type="checkbox" id="soundMode" />
+      </div>
+      <div class="control-group toggle-wrap">
+        <label for="customMode">Custom Text</label>
+        <input type="checkbox" id="customMode" />
+      </div>
+      <div class="control-group grow">
+        <label for="customText">Custom Practice Text</label>
+        <textarea id="customText" rows="2" placeholder="Paste your custom paragraph here..."></textarea>
+      </div>
+      <div class="control-group actions">
+        <button id="newSessionBtn" class="btn">New Session</button>
+        <button id="retryBtn" class="btn secondary">Retry</button>
+      </div>
+    </section>
+
+    <section class="stats-grid" id="statsPanel">
+      <article class="stat-card glass"><span>WPM</span><strong id="wpm">0</strong></article>
+      <article class="stat-card glass"><span>Accuracy</span><strong id="accuracy">100%</strong></article>
+      <article class="stat-card glass"><span>Errors</span><strong id="errors">0</strong></article>
+      <article class="stat-card glass"><span>Streak</span><strong id="streak">0</strong></article>
+      <article class="stat-card glass"><span>Timer</span><strong id="timer">60s</strong></article>
+      <article class="stat-card glass"><span>Weak Keys</span><strong id="weakLetters">—</strong></article>
+      <article class="stat-card glass"><span>XP / Level</span><strong id="xpLevel">0 / 1</strong></article>
+    </section>
+
+    <section class="typing-area glass" id="typingSection">
+      <div class="prompt-wrap" id="promptWrap" aria-live="polite">
+        <p id="promptText"></p>
+      </div>
+      <input id="hiddenInput" autocomplete="off" autocapitalize="off" spellcheck="false" />
+    </section>
+
+    <section class="keyboard-wrap glass">
+      <h2>Live Keyboard + Heatmap</h2>
+      <div id="keyboard" class="keyboard" role="application" aria-label="On-screen keyboard"></div>
+    </section>
+
+    <section class="settings-row glass">
+      <button id="exportBtn" class="btn secondary">Export Progress JSON</button>
+      <button id="resetBtn" class="btn danger">Reset Progress</button>
+      <p class="hint">Click typing area and start typing immediately.</p>
+    </section>
+
+    <section class="summary-modal" id="summaryModal" aria-hidden="true">
+      <div class="summary-card glass">
+        <h2>Session Summary</h2>
+        <div class="summary-grid">
+          <p>Final WPM: <strong id="finalWpm">0</strong></p>
+          <p>Final Accuracy: <strong id="finalAccuracy">0%</strong></p>
+          <p>Total Errors: <strong id="finalErrors">0</strong></p>
+          <p>Best Streak: <strong id="finalStreak">0</strong></p>
+        </div>
+        <p id="errorBreakdown"></p>
+        <canvas id="performanceChart" height="120"></canvas>
+        <div class="summary-actions">
+          <button id="summaryRetry" class="btn">Retry</button>
+          <button id="summaryNew" class="btn secondary">New Session</button>
+          <button id="summaryClose" class="btn ghost">Close</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
